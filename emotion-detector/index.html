@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detector ES6 Modules</title>
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- TensorFlow.js + MobileNet (API de alto nivel, incluye etiquetas) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.17.0/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1/dist/mobilenet.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <h1>[ ES6 MODULE DETECTOR ]</h1>
+    <p>Arquitectura modular · webcam.js · ui.js · model.js · app.js</p>
+  </header>
+
+  <main class="app-grid">
+
+    <div class="panel">
+      <h2> Cámara Web</h2>
+      <video id="video" autoplay muted playsinline></video>
+      <canvas id="canvas"></canvas>
+
+      <div class="controls">
+        <button id="btn-start"   disabled>Iniciar cámara</button>
+        <button id="btn-stop"    disabled>Detener</button>
+        <button id="btn-capture" disabled>Capturar frame</button>
+      </div>
+
+      <div id="loader" style="display:none;">
+        <div class="spinner"></div>
+        <span>Cargando modelo…</span>
+      </div>
+
+      <div id="status" class="status status--info">Iniciando…</div>
+    </div>
+
+    <!-- Panel derecho: resultados -->
+    <div class="panel">
+      <h2> Predicciones (Top-5)</h2>
+      <div id="results"></div>
+    </div>
+
+  </main>
+
+  <!-- Nota de arquitectura -->
+  <div class="arch-note">
+    <strong>Arquitectura ES6 Modules</strong><br/>
+    <code>webcam.js</code> → permisos y control del hardware &nbsp;|&nbsp;
+    <code>ui.js</code> → manipulación del DOM y barras de progreso &nbsp;|&nbsp;
+    <code>model.js</code> → carga asíncrona de TF.js e inferencia &nbsp;|&nbsp;
+    <code>app.js</code> → punto de entrada, importa y coordina los módulos<br/>
+    <br/>
+    <strong>Para ejecutar localmente</strong>: abre en VS Code con la extensión
+    <strong>Live Server</strong> (clic derecho → <em>Open with Live Server</em>).
+    No abras el <code>index.html</code> directo con doble clic: los módulos ES6
+    necesitan HTTP, no el protocolo <code>file://</code>.
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
